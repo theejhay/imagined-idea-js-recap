@@ -1,3 +1,4 @@
+require("dotenv").config();
 const http = require("http");
 
 const server = http.createServer((req, res) =>{
@@ -18,7 +19,7 @@ const server = http.createServer((req, res) =>{
             console.log(user)
             res.writeHead(201, { "Content-Type": "application/json"});
             res.end(JSON.stringify({
-                message: "user created",
+                message: "user created successfully",
                 user: user
             }))
         })
@@ -28,8 +29,9 @@ const server = http.createServer((req, res) =>{
     
 });
 
-server.listen(3005, () => {
-    console.log("Server running on port 3005")
+const PORT = process.env.PORT;
+server.listen(PORT, () => {
+    console.log("Server running on port: ", PORT)
 })
 
 // server.listen(3005);
