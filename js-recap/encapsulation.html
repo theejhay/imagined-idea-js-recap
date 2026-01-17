@@ -69,6 +69,32 @@
         account.withdraw(1000);
         console.log(account.getMyName());
 
+        // Imagine a TV remote
+        // You press buttons
+        // You don't need to see wires, circuit board inside the remote
+        // You don't need to know how it works 
+        // You only interact with what is allowed
+
+        // Lunch Box - Class
+        // Food - Data
+        // Open/Close - (Action) - Methods
+
+        class OpayAccount {
+            #balance = 0; // private data
+
+            deposit(amount){
+                this.#balance += amount;
+            }
+
+            getBalance(){
+                return this.#balance;
+            }
+        }
+
+        const oPay = new OpayAccount();
+        oPay.balance = 3000;
+        console.log(oPay.balance) // additional property - fake balance
+        console.log(oPay.getBalance()) // real balance
 
 
 
