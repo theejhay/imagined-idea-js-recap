@@ -3,11 +3,11 @@ const http = require("http");
 
 const server = http.createServer((req, res) =>{
     if(req.url === "/"){
-       res.end("Hello from Nodejs server") 
+       res.end("Hello, from NodeJs Server")
     }  else if (req.url === "/about"){
         res.end("About us Page")
     } else if (req.url === "/user" && req.method === "GET") {
-        res.end("Get User using GET method")
+        res.end("Fetching User using GET Request method")
     } else if (req.url === "/login" && req.method === "POST") {
         let body = "";
         req.on("data", userData => {
@@ -19,7 +19,7 @@ const server = http.createServer((req, res) =>{
             console.log(user)
             res.writeHead(201, { "Content-Type": "application/json"});
             res.end(JSON.stringify({
-                message: "user created successfully",
+                message: "user created successfully!",
                 user: user
             }))
         })
