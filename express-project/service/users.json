@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1769029332667,
+    "name": "Mike",
+    "age": 40,
+    "gender": "Male",
+    "dateAdded": "2026-01-21T21:02:12.667Z"
+  },
+  {
+    "id": 1769029356726,
+    "name": "Juliana",
+    "age": 26,
+    "gender": "Female",
+    "dateAdded": "2026-01-21T21:02:36.726Z"
+  },
+  {
+    "id": 1769029406835,
+    "name": "Juliet",
+    "age": 56,
+    "gender": "Female",
+    "dateAdded": "2026-01-21T21:03:26.835Z"
+  }
+]
