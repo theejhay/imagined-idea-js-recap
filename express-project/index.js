@@ -15,3 +15,9 @@ app.listen(3000, () => {
 
 
 // Client (PostMan) - > Routes -> Controller -> Service -> Data (JSON File)
+// SOLID Principles:
+// S - Single Responsibility Principle
+// O - Open/Closed Principle
+// L - Liskov Substitution Principle
+// I - Interface Segregation Principle
+// D - Dependency Inversion Principle
