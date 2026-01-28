@@ -1,32 +1,31 @@
+const {
+  validateName,
+  validateAge,
+  validateGender,
+} = require("../validators/userValidators");
+
 const validateUser = (req, res, next) => {
   const { name, age, gender } = req.body;
-  if (!name || !age || !gender) {
+
+  const errors = [];
+
+  const nameError = validateName(name);
+  if (nameError) errors.push(nameError);
+
+  const ageError = validateAge(age);
+  if (ageError) errors.push(ageError);
+
+  const genderError = validateGender(gender);
+  if (genderError) errors.push(genderError);
+
+  if (errors.length > 0) {
     return res.status(400).json({
       success: false,
-      message: "Name, age, and gender are required!",
+      errors,
     });
   }
 
-  // Gender must be exactly one character
-  const allowedGenders = ["M", "F", "O"];
-  if (!allowedGenders.includes(gender.toUpperCase())) {
-    return res.status(400).json({
-      success: false,
-      message:
-        "Gender must be a single character (e.g 'M', 'F', or 'O), your current length is " +
-        gender.length,
-    });
-  }
-
-  if (age >= 50) {
-    return res.status(400).json({
-      success: false,
-      message: "Sorry! you're too old to be on this platform",
-    });
-  }
-
-  next(); // All good, go to controller
-
+  next();
 };
 
 module.exports = validateUser;

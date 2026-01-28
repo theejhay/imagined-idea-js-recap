@@ -1,8 +1,9 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const DATA_FILE = "./repository/users.json";
 
-function readData() {
-  const data = fs.readFileSync(DATA_FILE, "utf8");
+async function readData() {
+  const data = await fs.readFile(DATA_FILE, "utf8");
+  console.log(data)
   if (!data.trim()) {
     return [];
   }
@@ -13,7 +14,10 @@ function writeData(data) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-const getAll = () => readData();
+const getAll = async () => {
+  const users = await readData();
+  return users;
+}
 
 const createUser = (userData) => {
   const users = readData();
