@@ -1,8 +1,8 @@
-const {
-  validateName,
+import {
   validateAge,
   validateGender,
-} = require("../validators/userValidators");
+  validateName,
+} from "../validators/userValidators.js";
 
 const validateUser = (req, res, next) => {
   const { name, age, gender } = req.body;
@@ -28,4 +28,4 @@ const validateUser = (req, res, next) => {
   next();
 };
 
-module.exports = validateUser;
+export { validateUser };

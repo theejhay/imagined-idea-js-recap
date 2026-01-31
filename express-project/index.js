@@ -1,10 +1,10 @@
-const express = require("express");
-const userRoutes = require('./routes/users.routes');
-const errorMiddleware = require("./middlewares/error.middleware");
-const fs = require("fs");
+import express from 'express';
+import userRoutes from './routes/users.routes.js';
+import errorMiddleware from './middlewares/error.middleware.js';
 
 const app = express();
 app.use(express.json()); // to enable our req.body
+
 
 app.use("/users", userRoutes);
 

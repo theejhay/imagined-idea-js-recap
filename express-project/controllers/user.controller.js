@@ -1,31 +1,25 @@
-const userService = require("../services/user.service");
-const getUsers = async (req, res, next) => {
-  try {
-    const users = await userService.getAll();
-    res.json({
-      success: true,
-      data: users,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
+import * as userService from "../services/user.service.js";
+import asyncHandler from "../utils/asyncHandler.js";
+
+const getUsers = asyncHandler(async (req, res, next) => {
+  const users = await userService.getAll();
+  res.json({
+    success: true,
+    data: users,
+  });
+});
 // CRUD - Create, Read, Update, Delete
 
-const createUser = (req, res, next) => {
-  try {
-    const user = userService.createUser(req.body);
-    res.status(201).json({
-      success: true,
-      data: user,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
+const createUser = asyncHandler(async (req, res, next) => {
+  const user = await userService.createUser(req.body);
+  res.status(201).json({
+    success: true,
+    data: user,
+  });
+});
 
-const updateUser = (req, res) => {
-  const updated = userService.updateUser(req.params.id, req.body);
+const updateUser = asyncHandler(async (req, res) => {
+  const updated = await userService.updateUser(req.params.id, req.body);
   console.log(updated);
 
   if (!updated) {
@@ -37,10 +31,10 @@ const updateUser = (req, res) => {
     success: true,
     data: updated,
   });
-};
+});
 
-const patchUser = (req, res) => {
-  const updated = userService.patchUser(req.params.id, req.body);
+const patchUser = asyncHandler(async (req, res) => {
+  const updated = await userService.patchUser(req.params.id, req.body);
   console.log(updated);
 
   if (!updated) {
@@ -52,22 +46,31 @@ const patchUser = (req, res) => {
     success: true,
     data: updated,
   });
-};
+});
 
-const deleteUser = (req, res) => {
-  const deleted = userService.deleteUser(req.params.id);
+const deleteUser = asyncHandler(async (req, res) => {
+  const deleted = await userService.deleteUser(req.params.id);
   if (!deleted) {
     return res.status(404).json({
       success: false,
     });
   }
   res.status(204).json();
-};
+});
 
-module.exports = {
-  getUsers,
-  createUser,
-  updateUser,
-  patchUser,
-  deleteUser,
-};
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: "User not found!",
+    });
+  }
+
+  res.json({
+    success: true,
+    data: user,
+  });
+});
+
+export { getUsers, createUser, updateUser, patchUser, deleteUser, getUserById };

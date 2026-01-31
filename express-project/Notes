@@ -1,0 +1,16 @@
+Common Js VS ES module
+require -> CommonJS
+import -> ES Module
+
+Node Js is default to commonJS
+
+Common JS 
+- Older
+- Node-native (Node uses it by Default)
+- Most backend trainings use this.
+
+ES Modules
+- Modern JavaScript
+- Browser Standard
+- Cleaner/Beautiful Syntax
+- Needs Configuration (type=module in package.json file)
