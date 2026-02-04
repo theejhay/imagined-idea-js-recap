@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+
 const DATA_FILE = "./repository/users.json";
 
 async function readData() {
