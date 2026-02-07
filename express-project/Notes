@@ -55,3 +55,13 @@ It has 3 sections separated by DOTS (.) HEADER.PAYLOAD.SIGNATURE
 } // Never put password
 
 3. Signature - The most IMPORTANT (SECRET) - Always in your ENV file 
+
+jwt.sign()
+jwt.verify()
+
+
+-  JWT is not Encryption
+-  JWT Does not hide data
+
+
+

@@ -17,4 +17,13 @@ const login = asyncHandler(async (req, res, next) => {
   });
 });
 
-export { registerUser, login };
+const refresh = asyncHandler(async (req, res, next) => {
+  const {refreshToken} = req.body;
+  const accessToken = await authService.refreshToken(refreshToken);
+  res.json({
+    success: true,
+    accessToken: accessToken,
+  });
+});
+
+export { registerUser, login, refresh };

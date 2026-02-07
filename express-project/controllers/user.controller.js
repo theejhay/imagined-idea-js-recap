@@ -20,7 +20,6 @@ const createUser = asyncHandler(async (req, res, next) => {
 
 const updateUser = asyncHandler(async (req, res) => {
   const updated = await userService.updateUser(req.params.id, req.body);
-  console.log(updated);
 
   if (!updated) {
     return res.status(404).json({
@@ -35,7 +34,6 @@ const updateUser = asyncHandler(async (req, res) => {
 
 const patchUser = asyncHandler(async (req, res) => {
   const updated = await userService.patchUser(req.params.id, req.body);
-  console.log(updated);
 
   if (!updated) {
     return res.status(404).json({

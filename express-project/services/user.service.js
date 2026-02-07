@@ -4,7 +4,6 @@ const DATA_FILE = "./repository/users.json";
 
 async function readData() {
   const data = await fs.readFile(DATA_FILE, "utf8");
-  console.log(data);
   if (!data.trim()) {
     return [];
   }
