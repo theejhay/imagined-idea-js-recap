@@ -1,7 +1,8 @@
 import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import { hashPassword, comparePassword } from "../utils/password.js";
-import { generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
+import { decodeToken, generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
+import * as blacklistService from "../services/blacklist.service.js"
 
 const DATA_FILE = "./repository/auth_users.json";
 
@@ -92,4 +93,10 @@ async function refreshToken(oldRefreshToken) {
   return generateAccessToken(user);
 }
 
-export { register, login, refreshToken };
+async function logout(refreshToken) {
+  const decoded = decodeToken(refreshToken);
+  console.log(decoded);
+  return await blacklistService.addToken(refreshToken, decoded.exp * 1000);
+}
+
+export { register, login, refreshToken, logout };

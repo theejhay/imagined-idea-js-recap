@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
+import * as blacklistService from "../services/blacklist.service.js";
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
     // check if header exists
     const authHeader = req.headers.authorization;
     if(!authHeader){
@@ -18,6 +19,18 @@ const authMiddleware = (req, res, next) => {
     // validate token 
 
     try {
+
+        // cleanup old blacklist tokens
+        await blacklistService.cleanupExpiredToken();
+
+        // check blacklist
+        const blackListToken = await blacklistService.isBlacklisted(token);
+        if(blackListToken){
+            return res.status(401).json({
+                success: false,
+                message: "Token has been invalidated"
+            })
+        }
         // verify token 
         const SECRET = process.env.JWT_SECRET;
         const decoded = jwt.verify(token, SECRET);

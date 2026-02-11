@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const generateAccessToken = (user) => {
-  const ACCESS_TOKEN_EXPIRY = "30s";
+  const ACCESS_TOKEN_EXPIRY = "2m";
   const SECRET = process.env.JWT_SECRET;
   return jwt.sign(user, SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
 };
@@ -12,7 +12,11 @@ const generateRefreshToken = (user) => {
   return jwt.sign(user, SECRET, { expiresIn: REFRESH_TOKEN_EXPIRY });
 };
 
-export { generateAccessToken, generateRefreshToken };
+const decodeToken = (token) => {
+  return jwt.decode(token);
+}
+
+export { generateAccessToken, generateRefreshToken, decodeToken };
 
 // Access Token = short lived
 // Refresh Token = long-lived

@@ -64,4 +64,4 @@ jwt.verify()
 -  JWT Does not hide data
 
 
-
+// What's is the diffrence between Authentication and Authorization? Give examples
