@@ -1,24 +1,9 @@
 [
   {
-    "id": "827c2225-58bb-4e35-8dde-ff06718285f3",
-    "email": "abc@gmail.com",
-    "name": "Taiwo John",
-    "password": "$2b$10$32AeptLwyGEpOYX2yUIL.uz7eI3j7nWSuIXgOU0ZpYLn2Ml/MoVxK",
-    "role": "user"
-  },
-  {
-    "id": "d44f3e8d-abab-474e-b085-0bf5632845ce",
-    "email": "abcde@gmail.com",
-    "name": "Taiwo John",
-    "password": "$2b$10$S/dGqKYKibF7iQTXPDjX4OgegRLtIKl3tVjP6AUX2j6j1oM3pmFXC",
-    "role": "user",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0NGYzZThkLWFiYWItNDc0ZS1iMDg1LTBiZjU2MzI4NDVjZSIsIm5hbWUiOiJUYWl3byBKb2huIiwiZW1haWwiOiJhYmNkZUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc3MTA3MzA5OSwiZXhwIjoxNzcxNjc3ODk5fQ.oej2bgitKoxJvXPIUmqKV4T9LKqMMK_ca_NmsHCU_A4"
-  },
-  {
-    "id": "9266c637-af01-487b-919d-51ab7d7b4d4c",
-    "email": "googdness@gmail.com",
+    "id": "39e45137-3647-4551-9e95-a093b550c1cb",
+    "email": "goodness@gmail.com",
     "name": "Goodness Opeyemi",
-    "password": "$2b$10$fEGoIvhLMJQxfCub5NuQsuIH3kdPAAwAIy.aso7AWwDMF7GuzdNDu",
-    "role": "user"
+    "password": "$2b$10$w.YURET667Py8HdQSXKC0eca8ly8/pBVZqfF20YOXOcPcYFWIb3tu",
+    "role": "admin"
   }
 ]

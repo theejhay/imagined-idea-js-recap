@@ -1,0 +1,10 @@
+[
+  {
+    "id": "2011e6df-bf89-4e2d-81b5-1b2982868991",
+    "email": "omole_opeyemi@gmail.com",
+    "name": "Omole Opeyemi",
+    "password": "$2b$10$37sM7Ri2eSz8zICBn4rz0OW2tQoyapkBVJpc4dFOHnJcexa6SBW0e",
+    "role": "user",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTFlNmRmLWJmODktNGUyZC04MWI1LTFiMjk4Mjg2ODk5MSIsIm5hbWUiOiJPbW9sZSBPcGV5ZW1pIiwiZW1haWwiOiJvbW9sZV9vcGV5ZW1pQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzcxMDc0MzgzLCJleHAiOjE3NzE2NzkxODN9.YTaljRP5o_rC-3MPcUZalyeJo4BxnKzp3EBdEt5_4FM"
+  }
+]
