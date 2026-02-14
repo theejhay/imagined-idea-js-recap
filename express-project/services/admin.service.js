@@ -33,7 +33,7 @@ async function register(userData) {
     email: userData.email,
     name: userData.name,
     password: hashedPassword,
-    role: "user",
+    role: "admin",
   };
 
   authUsers.push(newUser);
@@ -64,6 +64,7 @@ async function login({ email, password }) {
     id: user.id,
     name: user.name,
     email: user.email,
+    role: user.role,
   };
   //return successUser;
   const accessToken = generateAccessToken(successUser);
