@@ -65,3 +65,26 @@ jwt.verify()
 
 
 // What's is the diffrence between Authentication and Authorization? Give examples
+
+// Rest Parameter (used with functions) and Spread Operator
+
+Rest Parameter: allows indefinite numbers of arguments and itconverts them into an array 
+function sum(...numbers){
+    //numbers = [2,4,6,8,9]
+    console.log(numbers);
+
+}
+
+sum(2,4,6,8,9);
+
+
+Spread Operator
+
+cons a = [1,2];
+cont b = [3,4];
+const numbers = [1,2,3,4,5];
+
+const clonedNumbers = [...numbers]
+// do anything you like, it doesn't affect the original array 
+
+const merge = [...a, ...b]
