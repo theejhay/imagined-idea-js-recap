@@ -2,9 +2,9 @@ import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import { hashPassword, comparePassword } from "../utils/password.js";
 import { decodeToken, generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
-import * as blacklistService from "../services/blacklist.service.js"
+import * as blacklistService from "./blacklist.service.js"
 
-const DATA_FILE = "./repository/auth_users.json";
+const DATA_FILE = "./repository/admin.json";
 
 async function readData() {
   const data = await fs.readFile(DATA_FILE, "utf8");

@@ -1,4 +1,4 @@
-import * as authService from "../services/auth.service.js";
+import * as authService from "../services/admin.service.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 

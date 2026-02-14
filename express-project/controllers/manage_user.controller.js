@@ -1,4 +1,4 @@
-import * as userService from "../services/user.service.js";
+import * as userService from "../services/manage_user.service.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 const getUsers = asyncHandler(async (req, res, next) => {

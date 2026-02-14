@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from 'express';
-import userRoutes from './routes/users.routes.js';
+import manageUserRoutes from './routes/manage_users.routes.js';
 import authRoutes from './routes/auth.routes.js'
 import errorMiddleware from './middlewares/error.middleware.js';
 
@@ -10,8 +10,8 @@ import errorMiddleware from './middlewares/error.middleware.js';
 const app = express();
 app.use(express.json()); // to enable our req.body
 
-app.use("/auth", authRoutes)
-app.use("/users", userRoutes);
+app.use("/auth/admin", authRoutes)
+app.use("/manage-users", manageUserRoutes);
 
 // It must be the last middleware
 app.use(errorMiddleware);
