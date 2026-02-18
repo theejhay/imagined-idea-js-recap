@@ -6,5 +6,12 @@
     "password": "$2b$10$w.YURET667Py8HdQSXKC0eca8ly8/pBVZqfF20YOXOcPcYFWIb3tu",
     "role": "admin",
     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM5ZTQ1MTM3LTM2NDctNDU1MS05ZTk1LWEwOTNiNTUwYzFjYiIsIm5hbWUiOiJHb29kbmVzcyBPcGV5ZW1pIiwiZW1haWwiOiJnb29kbmVzc0BnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzEwNzU4NjIsImV4cCI6MTc3MTY4MDY2Mn0.ZLE7MRD4QQOUV0DFPwI6YXR2VoMfIPcNK3igz2Fte7k"
+  },
+  {
+    "id": "3d6e010d-cd6f-4620-9c84-302f4f92f880",
+    "email": "simi_paul@gmail.com",
+    "name": "Simi Paul",
+    "password": "$2b$10$dnwskCDe2MW4OqeKHQHfmexfJ5MhzWgZm55ow3Rq1XofdYKeMHtTi",
+    "role": "admin"
   }
 ]
