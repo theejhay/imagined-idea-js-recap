@@ -1,8 +1,13 @@
 import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import { hashPassword, comparePassword } from "../utils/password.js";
-import { decodeToken, generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
-import * as blacklistService from "./blacklist.service.js"
+import {
+  decodeToken,
+  generateAccessToken,
+  generateRefreshToken,
+} from "../utils/jwt.js";
+import * as blacklistService from "./blacklist.service.js";
+import * as userRepository from "../repository/userRepository.js";
 
 const DATA_FILE = "./repository/admin.json";
 
@@ -19,9 +24,9 @@ async function writeData(data) {
 }
 
 async function register(userData) {
-  const authUsers = await readData();
+  const authUsers = await userRepository.getAllUsers();
 
-  const exists = authUsers.find((u) => u.email === userData.email);
+  const exists = await userRepository.getByEmail(userData.email);
   if (exists) {
     throw new Error("user already exists");
   }
@@ -36,15 +41,17 @@ async function register(userData) {
     role: "admin",
   };
 
-  authUsers.push(newUser);
-  await writeData(authUsers);
+  const createUserData = await userRepository.createUser(newUser);
 
-  return {
-    id: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
-    role: newUser.role,
-  };
+  if (createUserData) {
+      return {
+        id: createUserData.id,
+        name: createUserData.name,
+        email: createUserData.email,
+        role: createUserData.role,
+      };
+    }
+  return null;
 }
 
 async function login({ email, password }) {
@@ -71,25 +78,24 @@ async function login({ email, password }) {
   const refreshToken = generateRefreshToken(successUser);
 
   user.refreshToken = refreshToken;
-  await writeData(users)
+  await writeData(users);
 
-  
   // We can have in hours (h), seconds (s), minutes (m), days (d)
 
   return {
     id: user.id,
     name: user.name,
     email: user.email,
-    accessToken : accessToken,
-    refreshToken: refreshToken
+    accessToken: accessToken,
+    refreshToken: refreshToken,
   };
 }
 
 async function refreshToken(oldRefreshToken) {
   const users = await readData();
-  const user = users.find(u => u.refreshToken === oldRefreshToken);
+  const user = users.find((u) => u.refreshToken === oldRefreshToken);
 
-  if(!user) throw new Error("Invalid refresh Token");
+  if (!user) throw new Error("Invalid refresh Token");
 
   return generateAccessToken(user);
 }
