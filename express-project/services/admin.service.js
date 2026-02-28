@@ -6,11 +6,11 @@ import {
   generateRefreshToken,
 } from "../utils/jwt.js";
 import * as blacklistService from "./blacklist.service.js";
-import * as userRepository from "../repository/userRepository.js";
+import * as adminRepository from "../repository/adminRepository.js";
 
 
 async function register(userData) {
-  const exists = await userRepository.getByEmail(userData.email);
+  const exists = await adminRepository.getByEmail(userData.email);
   if (exists) {
     throw new Error("user already exists");
   }
@@ -25,7 +25,7 @@ async function register(userData) {
     role: "admin",
   };
 
-  const createUserData = await userRepository.createUser(newUser);
+  const createUserData = await adminRepository.createUser(newUser);
 
   if (createUserData) {
       return {
@@ -39,7 +39,7 @@ async function register(userData) {
 }
 
 async function login({ email, password }) {
-  const user = await userRepository.getByEmail(email);
+  const user = await adminRepository.getByEmail(email);
   if (!user) {
     throw new Error("Invalid email or password");
   }
@@ -61,7 +61,7 @@ async function login({ email, password }) {
   const refreshToken = generateRefreshToken(successUser);
 
   // update refreshtoken on login 
-  await userRepository.updateRefreshToken(user.uuid, refreshToken);
+  await adminRepository.updateRefreshToken(user.uuid, refreshToken);
 
   // We can have in hours (h), seconds (s), minutes (m), days (d)
 
@@ -75,7 +75,7 @@ async function login({ email, password }) {
 }
 
 async function refreshToken(oldRefreshToken) {
-  const user = await userRepository.getByRefreshToken(oldRefreshToken);
+  const user = await adminRepository.getByRefreshToken(oldRefreshToken);
 
   if (!user) throw new Error("Invalid refresh Token");
 
