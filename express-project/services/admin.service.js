@@ -1,4 +1,3 @@
-import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import { hashPassword, comparePassword } from "../utils/password.js";
 import {
@@ -9,23 +8,8 @@ import {
 import * as blacklistService from "./blacklist.service.js";
 import * as userRepository from "../repository/userRepository.js";
 
-const DATA_FILE = "./repository/admin.json";
-
-async function readData() {
-  const data = await fs.readFile(DATA_FILE, "utf8");
-  if (!data.trim()) {
-    return [];
-  }
-  return JSON.parse(data);
-}
-
-async function writeData(data) {
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
-}
 
 async function register(userData) {
-  const authUsers = await userRepository.getAllUsers();
-
   const exists = await userRepository.getByEmail(userData.email);
   if (exists) {
     throw new Error("user already exists");
@@ -34,7 +18,7 @@ async function register(userData) {
   const hashedPassword = await hashPassword(userData.password, 10);
 
   const newUser = {
-    id: uuidv4(),
+    uuid: uuidv4(),
     email: userData.email,
     name: userData.name,
     password: hashedPassword,
@@ -45,7 +29,7 @@ async function register(userData) {
 
   if (createUserData) {
       return {
-        id: createUserData.id,
+        uuid: createUserData.uuid,
         name: createUserData.name,
         email: createUserData.email,
         role: createUserData.role,
@@ -55,8 +39,7 @@ async function register(userData) {
 }
 
 async function login({ email, password }) {
-  const users = await readData();
-  const user = users.find((u) => u.email === email);
+  const user = await userRepository.getByEmail(email);
   if (!user) {
     throw new Error("Invalid email or password");
   }
@@ -68,7 +51,7 @@ async function login({ email, password }) {
 
   // login successful
   const successUser = {
-    id: user.id,
+    uuid: user.uuid,
     name: user.name,
     email: user.email,
     role: user.role,
@@ -77,8 +60,8 @@ async function login({ email, password }) {
   const accessToken = generateAccessToken(successUser);
   const refreshToken = generateRefreshToken(successUser);
 
-  user.refreshToken = refreshToken;
-  await writeData(users);
+  // update refreshtoken on login 
+  await userRepository.updateRefreshToken(user.uuid, refreshToken);
 
   // We can have in hours (h), seconds (s), minutes (m), days (d)
 
@@ -92,12 +75,16 @@ async function login({ email, password }) {
 }
 
 async function refreshToken(oldRefreshToken) {
-  const users = await readData();
-  const user = users.find((u) => u.refreshToken === oldRefreshToken);
+  const user = await userRepository.getByRefreshToken(oldRefreshToken);
 
   if (!user) throw new Error("Invalid refresh Token");
 
-  return generateAccessToken(user);
+  return generateAccessToken({
+    uuid: user.uuid,
+    name: user.name,
+    email: user.email,
+    role: user.role
+  });
 }
 
 async function logout(refreshToken) {

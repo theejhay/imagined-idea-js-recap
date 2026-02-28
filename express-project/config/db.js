@@ -9,9 +9,9 @@ const connection = mysql.createConnection({
 
 connection.connect((error) => {
     if(error){
-        console.log("DAtabase Connection Failed!")
+        console.log("Database Connection Failed!")
     }
-    console.log("We are connect to the Database bruh!")
+    console.log("We are connected to the Database bruh!")
 })
 
 export default connection.promise();

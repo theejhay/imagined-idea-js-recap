@@ -13,21 +13,31 @@ async function getByEmail(email){
     return rows[0];
 }
 
-async function getById(id){
-    const [rows] = await db.query("SELECT * FROM admin WHERE id = ?", [id]);
+async function getByuuid(uuid){
+    const [rows] = await db.query("SELECT * FROM admin WHERE uuid = ?", [uuid]);
     return rows[0];
 }
 
 async function createUser(user){
-    const {id, name, email, role, password} = user;
+    const {uuid, name, email, role, password} = user;
     const [result] = await db.query(
-        'INSERT INTO admin (id, name, email, role, password) VALUES(?, ?, ?, ?, ?)', [id, name, email, role, password]
+        'INSERT INTO admin (uuid, name, email, role, password) VALUES(?, ?, ?, ?, ?)', [uuid, name, email, role, password]
     );
 
-    // get Inserted Row
-    const [rows] = await db.query("SELECT * FROM admin ORDER BY id DESC LIMIT 1")
+    const insertedId = result.insertId;
 
+    // get Inserted Row
+    const [rows] = await db.query("SELECT * FROM admin WHERE id = ?", [insertedId])
     return rows[0];
 }
 
-export {getAllUsers, getByEmail, getById, createUser}
+async function updateRefreshToken(uuid, refreshToken){
+    await db.query("UPDATE admin SET refresh_token = ? WHERE uuid = ? ", [ refreshToken, uuid ]);
+}
+
+async function getByRefreshToken(refreshToken){
+    const [rows] = await db.query("SELECT * FROM admin WHERE refresh_token = ?", [refreshToken]);
+    return rows[0];
+}
+
+export {getAllUsers, getByEmail, getByuuid, createUser, updateRefreshToken, getByRefreshToken}
