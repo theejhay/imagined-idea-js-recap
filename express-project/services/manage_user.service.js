@@ -32,22 +32,22 @@ const createUser = async (userData) => {
   return newUser;
 };
 
+// const updateUser = async (id, updates) => {
+//   const users = await readData();
+//   const index = users.findIndex((user) => user.id === Number(id));
+//   if (index === -1) return null;
+
+//   users[index] = {
+//     id: users[index].id,
+//     name: updates.name,
+//     age: updates.age,
+//     dateAdded: users[index].dateAdded,
+//   };
+//   await writeData(users);
+//   return users[index];
+// };
+
 const updateUser = async (id, updates) => {
-  const users = await readData();
-  const index = users.findIndex((user) => user.id === Number(id));
-  if (index === -1) return null;
-
-  users[index] = {
-    id: users[index].id,
-    name: updates.name,
-    age: updates.age,
-    dateAdded: users[index].dateAdded,
-  };
-  await writeData(users);
-  return users[index];
-};
-
-const patchUser = async (id, updates) => {
   const users = await readData();
   const index = users.findIndex((user) => user.id === Number(id));
   if (index === -1) return null;
@@ -70,4 +70,4 @@ const getUserById = async (id) => {
   return users.find((user) => user.id === Number(id));
 };
 
-export { getAll, createUser, updateUser, patchUser, deleteUser, getUserById };
+export { getAll, createUser, updateUser, deleteUser, getUserById };
