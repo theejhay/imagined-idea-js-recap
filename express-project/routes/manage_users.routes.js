@@ -11,7 +11,7 @@ router.get("/", authMiddleware, authorize(ADMIN), userController.getUsers);
 router.get("/:id", authMiddleware, authorize(ADMIN), userController.getUserById)
 router.post("/", authMiddleware, authorize(ADMIN), validateUser, userController.createUser);
 router.put("/:id", authMiddleware, authorize(ADMIN), userController.updateUser)
-router.patch("/user/:id", authMiddleware, authorize(ADMIN), userController.patchUser)
+// router.patch("/user/:id", authMiddleware, authorize(ADMIN), userController.patchUser)
 router.delete("/:id", authMiddleware, authorize(ADMIN), userController.deleteUser)
 
 export default router;

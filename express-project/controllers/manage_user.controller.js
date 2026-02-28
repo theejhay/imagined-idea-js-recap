@@ -32,19 +32,19 @@ const updateUser = asyncHandler(async (req, res) => {
   });
 });
 
-const patchUser = asyncHandler(async (req, res) => {
-  const updated = await userService.patchUser(req.params.id, req.body);
+// const patchUser = asyncHandler(async (req, res) => {
+//   const updated = await userService.patchUser(req.params.id, req.body);
 
-  if (!updated) {
-    return res.status(404).json({
-      success: false,
-    });
-  }
-  return res.json({
-    success: true,
-    data: updated,
-  });
-});
+//   if (!updated) {
+//     return res.status(404).json({
+//       success: false,
+//     });
+//   }
+//   return res.json({
+//     success: true,
+//     data: updated,
+//   });
+// });
 
 const deleteUser = asyncHandler(async (req, res) => {
   const deleted = await userService.deleteUser(req.params.id);
@@ -71,4 +71,4 @@ const getUserById = asyncHandler(async (req, res) => {
   });
 });
 
-export { getUsers, createUser, updateUser, patchUser, deleteUser, getUserById };
+export { getUsers, createUser, updateUser, deleteUser, getUserById };
