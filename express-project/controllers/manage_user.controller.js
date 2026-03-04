@@ -1,7 +1,7 @@
 import * as userService from "../services/manage_user.service.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
-const getUsers = asyncHandler(async (req, res, next) => {
+const getUsers = asyncHandler(async (req, res, _next) => {
   const users = await userService.getAll();
   res.json({
     success: true,
@@ -10,7 +10,7 @@ const getUsers = asyncHandler(async (req, res, next) => {
 });
 // CRUD - Create, Read, Update, Delete
 
-const createUser = asyncHandler(async (req, res, next) => {
+const createUser = asyncHandler(async (req, res, _next) => {
   const user = await userService.createUser(req.body);
   res.status(201).json({
     success: true,

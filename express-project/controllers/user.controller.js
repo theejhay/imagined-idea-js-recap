@@ -2,7 +2,7 @@ import * as authService from "../services/user.service.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 
-const registerUser = asyncHandler(async (req, res, next) => {
+const registerUser = asyncHandler(async (req, res, _next) => {
   const user = await authService.register(req.body);
   res.status(201).json({
     success: true,
@@ -10,7 +10,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-const login = asyncHandler(async (req, res, next) => {
+const login = asyncHandler(async (req, res, _next) => {
   const user = await authService.login(req.body);
   res.json({
     success: true,
@@ -18,7 +18,7 @@ const login = asyncHandler(async (req, res, next) => {
   });
 });
 
-const refresh = asyncHandler(async (req, res, next) => {
+const refresh = asyncHandler(async (req, res, _next) => {
   const {refreshToken} = req.body;
   const accessToken = await authService.refreshToken(refreshToken);
   res.json({
@@ -27,7 +27,7 @@ const refresh = asyncHandler(async (req, res, next) => {
   });
 });
 
-const logout = asyncHandler(async (req, res, next) => {
+const logout = asyncHandler(async (req, res, _next) => {
   const { token } = req.body;
   await authService.logout(token);
   res.json({
@@ -36,7 +36,7 @@ const logout = asyncHandler(async (req, res, next) => {
   })
 })
 
-const getMyProfile = asyncHandler(async (req, res, next) => {
+const getMyProfile = asyncHandler(async (req, res, _next) => {
   const userId = req.user.id; // from JWT (req.user = what's coming from JWT )
 
   const user = await authService.getMyProfile(userId);

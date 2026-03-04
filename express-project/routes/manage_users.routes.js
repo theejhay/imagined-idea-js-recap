@@ -1,5 +1,5 @@
 import express from 'express';
-import { validateUser } from '../middlewares/validateUser.js';
+import { validateUser } from '../middlewares/joiUserValidator.js';
 import * as userController from '../controllers/manage_user.controller.js'
 import authMiddleware from '../middlewares/auth.middleware.js';
 import authorize from '../middlewares/authorize.middleware.js';
